@@ -46,3 +46,52 @@ CREATE TABLE club_member_info_cleaned (
 INSERT INTO club_member_info_cleaned
 SELECT * FROM club_member_info;
 ```
+
+####Align the names properly and standardize the letter casing
+```sql
+SELECT TRIM(LOWER(full_name)) AS fixed_full_name
+FROM club_member_info_cleaned cmic 
+LIMIT 10
+```
+The result should be like this
+
+|fixed_full_name|
+|---------------|
+|addie lush|
+|rock cradick|
+|sydel sharvell|
+|constantin de la cruz|
+|gaylor redhole|
+|wanda del mar|
+|joann kenealy|
+|joete cudiff|
+|mendie alexandrescu|
+|fey kloss|
+
+####Replace the null and unrealistic age with the AVG value of age column
+```sql
+SELECT
+CASE
+	WHEN age < 0 OR age > 100 THEN (
+	                                SELECT AVG(age)
+	                                FROM club_member_info_cleaned )
+	ELSE age
+END adjusted_age
+FROM club_member_info_cleaned cmic 
+LIMIT 10
+```
+The result should be like this:
+
+|adjusted_age|
+|------------|
+|40|
+|46|
+|46|
+|35|
+|38|
+|44|
+|41|
+|51|
+|46|
+|52|
+
