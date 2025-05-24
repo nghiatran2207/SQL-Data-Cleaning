@@ -1,5 +1,5 @@
-#DATA RANDOM PROJECT
-##Project Discription
+# DATA RANDOM PROJECT
+## Project Discription
 This is an educational project on data cleaning and preparation using SQL. The original database in CSV format is located in the file club_member_info.csv. Here, we will explore the steps that need to be applied to obtain a cleansed version of the dataset.
 
 ------------
@@ -24,8 +24,8 @@ LIMIT 10;
 
 ------------
 
-###Data Cleaning
-####Create a new table for cleaning
+### Data Cleaning
+#### Create a new table for cleaning
 Let's generate a new table where we can manipulate and restructure the data without modifying the original dataset.
 -- club_member_info definition
 ```sql
@@ -41,13 +41,13 @@ CREATE TABLE club_member_info_cleaned (
 	membership_date VARCHAR(50)
 );
 ```
-####Copy all values from original table
+#### Copy all values from original table
 ```sql
 INSERT INTO club_member_info_cleaned
 SELECT * FROM club_member_info;
 ```
 
-####Align the names properly and standardize the letter casing
+#### Align the names properly and standardize the letter casing
 ```sql
 SELECT TRIM(LOWER(full_name)) AS fixed_full_name
 FROM club_member_info_cleaned cmic 
@@ -68,7 +68,7 @@ The result should be like this
 |mendie alexandrescu|
 |fey kloss|
 
-####Replace the null and unrealistic age with the AVG value of age column
+#### Replace the null and unrealistic age with the AVG value of age column
 ```sql
 SELECT
 CASE
